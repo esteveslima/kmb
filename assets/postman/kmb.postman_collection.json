@@ -1,0 +1,735 @@
+{
+	"info": {
+		"_postman_id": "f2130a47-7893-4970-93ac-dc326ff0cf1c",
+		"name": "kmb",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10814302"
+	},
+	"item": [
+		{
+			"name": "scrape",
+			"item": [
+				{
+					"name": "/scrape",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"page\": \"https://google.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/scrape",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"scrape"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/scrape",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"page\": \"https://google.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/scrape",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"scrape"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 Oct 2023 16:20:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "/scrape/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/scrape/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"scrape",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/scrape/:id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/scrape/:id",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"scrape",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1893"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"765-zkw6BKphKIon+Bzoy3qFBOAdCTw\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 Oct 2023 16:18:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"pageName\": \"Google\",\n    \"status\": \"success\",\n    \"scrapeData\": [\n        {\n            \"link\": \"https://www.google.com/imghp?hl=pt-BR&tab=wi\\\"\",\n            \"linkName\": \"Imagens\"\n        },\n        {\n            \"link\": \"https://maps.google.com.br/maps?hl=pt-BR&tab=wl\\\"\",\n            \"linkName\": \"Maps\"\n        },\n        {\n            \"link\": \"https://play.google.com/?hl=pt-BR&tab=w8\\\"\",\n            \"linkName\": \"Play\"\n        },\n        {\n            \"link\": \"https://www.youtube.com/?tab=w1\\\"\",\n            \"linkName\": \"YouTube\"\n        },\n        {\n            \"link\": \"https://news.google.com/?tab=wn\\\"\",\n            \"linkName\": \"Not\\ufffdcias\"\n        },\n        {\n            \"link\": \"https://mail.google.com/mail/?tab=wm\\\"\",\n            \"linkName\": \"Gmail\"\n        },\n        {\n            \"link\": \"https://drive.google.com/?tab=wo\\\"\",\n            \"linkName\": \"Drive\"\n        },\n        {\n            \"link\": \"https://www.google.com.br/intl/pt-BR/about/products?tab=wh\\\"\",\n            \"linkName\": \"<u>Mais</u> &ra\"\n        },\n        {\n            \"link\": \"http://www.google.com.br/history/optout?hl=pt-BR\\\"\",\n            \"linkName\": \"Hist\\ufffdrico da Web\"\n        },\n        {\n            \"link\": \"/preferences?hl=pt-BR\\\"\",\n            \"linkName\": \"Configura\\ufffd\\ufffdes\"\n        },\n        {\n            \"link\": \"https://accounts.google.com/ServiceLogin?hl=pt-BR&passive=true&continue=https://www.google.com/&ec=GAZAAQ\\\"\",\n            \"linkName\": \"Fazer login\"\n        },\n        {\n            \"link\": \"/search?sca_esv=578190303&amp;ie=UTF-8&amp;q=Halloween&amp;oi=ddle&amp;ct=253317700&amp;hl=pt-BR&amp;si=ALGXSlZS0YT-iRe81F2cKC9lM9KWTK4y0m5Atx8g9YliNNw2mQXa0DDOfZpoTTzCjW8fYOofgmCFqwPPLD8Z8OziuAd90I0C51gqA5tTZn75pif6QgReWSuHuVmjQ2jyOOv4dVtWfYzzODghlAHR0dvf8J9LbUytXg%3D%3D&amp;sa=X&amp;ved=0ahUKEwi1tdWH1KCCAxXFLrkGHSs4B30QPQgD\\\"\",\n            \"linkName\": \"<img alt=\\\"Hallo\"\n        },\n        {\n            \"link\": \"/advanced_search?hl=pt-BR&amp;authuser=0\\\"\",\n            \"linkName\": \"Pesquisa avan\\ufffdada\"\n        },\n        {\n            \"link\": \"/intl/pt-BR/ads/\\\"\",\n            \"linkName\": \"Publicidade\"\n        },\n        {\n            \"link\": \"/services/\\\"\",\n            \"linkName\": \"Solu\\ufffd\\ufffdes empresariais\"\n        },\n        {\n            \"link\": \"/intl/pt-BR/about.html\\\"\",\n            \"linkName\": \"Sobre o Google\"\n        },\n        {\n            \"link\": \"https://www.google.com/setprefdomain?prefdom=BR&amp;prev=https://www.google.com.br/&amp;sig=K_x71mIULMLXLnjgvmXiceSOgVET8%3D\\\"\",\n            \"linkName\": \"Google.com.br\"\n        },\n        {\n            \"link\": \"/intl/pt-BR/policies/privacy/\\\"\",\n            \"linkName\": \"Privacidade\"\n        },\n        {\n            \"link\": \"/intl/pt-BR/policies/terms/\\\"\",\n            \"linkName\": \"Termos\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "/scrape/:id - pending",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/scrape/:id",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"scrape",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"44-+VC2uSAfVxrtNVAjDyRwzRwMLYg\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 Oct 2023 16:18:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"pageName\": \"https://google.com\",\n    \"status\": \"pending\",\n    \"scrapeData\": []\n}"
+						},
+						{
+							"name": "/scrape/:id - not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/scrape/:id",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"scrape",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "999"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "76"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4c-mT00XRy+dI/JkIJ4mgHC9KD3vi4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 Oct 2023 16:20:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Scrape not found for user\",\n    \"error\": \"Not Found\",\n    \"statusCode\": 404\n}"
+						}
+					]
+				},
+				{
+					"name": "/scrape",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/scrape",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"scrape"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/scrape",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/scrape",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"scrape"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "138"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8a-OelyCeo7sRM1jUsdTRhcZKZZKHY\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 Oct 2023 16:17:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"summary\": [\n        {\n            \"pageName\": \"Google\",\n            \"status\": \"success\",\n            \"totalLinks\": 19\n        },\n        {\n            \"pageName\": \"https://google.com\",\n            \"status\": \"pending\",\n            \"totalLinks\": 0\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "/user/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"user1\",\n    \"password\": \"abc123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/user/register",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"user1\",\n    \"password\": \"abc123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/user/register",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 Oct 2023 15:56:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								}
+							],
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "/register - username already exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"user1\",\n    \"password\": \"abc123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/user/register",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"49-G8O5hUW4AbuxA09Mezp1xpPJsSA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 Oct 2023 15:56:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"username already exists\",\n    \"error\": \"Conflict\",\n    \"statusCode\": 409\n}"
+						}
+					]
+				},
+				{
+					"name": "/user/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('AUTH_TOKEN', pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"user1\",\n    \"password\": \"abc123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/user/login",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/user/login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"user1\",\n    \"password\": \"abc123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/user/login",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "180"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b4-VtkD6HUXLcb+g5B+e/TTh6wc3wk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 Oct 2023 15:56:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwidXNlcklkIjo4LCJpYXQiOjE2OTg3Njc4MDUsImV4cCI6MTY5ODc2ODQwNX0.5OgL34_h6_NaGSaSTpacZhZRZ9dlOjnYgWGOkEqPasQ\"\n}"
+						},
+						{
+							"name": "/user/login - unhauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"user1\",\n    \"password\": \"abc12345\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/user/login",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"49-Fx+yDPXfDSYD3nxIxyU6P47CVX0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 Oct 2023 15:56:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid credentials\",\n    \"error\": \"Unauthorized\",\n    \"statusCode\": 401\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{AUTH_TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "AUTH_TOKEN",
+			"value": "[defined by \"/login\" test script]",
+			"type": "string"
+		}
+	]
+}

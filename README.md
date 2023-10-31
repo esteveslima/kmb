@@ -3,30 +3,48 @@
 ## Candidate notes:
 
 - Many decisions were taken to simplify the project, as this is supposed to be a simple exercise
-- The last requirement was ignored because it would probably require some sort of recurrent job to store stocks data to be able to provide the history, which wouldn't be easy to test without a proper deployment to have this running continuously
 - Added below some improvements that would be required to be done in the case this was a real project
 
 ### Potential improvements:
 - Enhance design and structure, as this is only simple enough to make the requirements work
-- Add unit testing
-- Add e2e testing
-- Enhance queries/operations performance, the current ones were focused mostly to ensure security against race conditions
+- Add unit and e2e testing
+- Enhance queries/operations performance
 - Enhance input validation and error handling
-- Secure the math, as there could be rouding problems along the way in the code and/or database
-- Implement proper users and auth, the current concept of `user` is just a simple number representing different users
+- Fix the hash bug with the docker environment
+- When the worker fails to fetch the data it doesn't issue a job to register the failure scrape, it stucks in the "pending" state
 
 
 ## API Docs
 
-There's a Postman collection with examples in the `/assets` folder to ease the testing
+There's a Postman collection with examples in the `/assets` folder to facilitate testing
 
-- mutation: purchaseStock(user: int, stock: string, shares: int)
-  - purchase the amount of shares of a particular stock
-- mutation: sellStock(user: int, stock: string, shares: int)
-  - sell the amount of shares of a particular stock, if there's enough shares of it available
-- query: getStocksSummary(user: int)
-  - get the summary of all stocks owned by the user
+```
+public endpoints:
 
+- POST /user/register
+  {
+    "username": "",
+    "password": ""
+  }
+
+- POST /user/login
+  {
+    "username": "",
+    "password": ""
+  }
+
+private endpoints:
+(requires "Authorization" header with the Bearer JWT token)
+
+- POST /scrape
+  {
+    "page": ""
+  }
+
+- GET /scrape
+- GET /scrape/:id
+
+```
 
 ## Running the project with Docker
 

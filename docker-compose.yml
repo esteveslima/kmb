@@ -1,31 +1,31 @@
 version: '3.8'
 services:
     
-    # api-container:
-    #     build:
-    #         context: ./projects/api
-    #         dockerfile: Dockerfile
-    #     depends_on:
-    #         - mysql-container
-    #         - redis-container
-    #     env_file:
-    #         - ./projects/api/.env
-    #     restart: "no"
-    #     ports:
-    #         - 8000:3000
+    api-container:
+        build:
+            context: ./projects/api
+            dockerfile: Dockerfile
+        depends_on:
+            - mysql-container
+            - redis-container
+        env_file:
+            - ./projects/api/.env
+        restart: "no"
+        ports:
+            - 8000:3000
 
-    # worker-container:
-    #     build:
-    #         context: ./projects/worker
-    #         dockerfile: Dockerfile
-    #     depends_on:
-    #         - mysql-container
-    #         - redis-container
-    #     env_file:
-    #         - ./projects/worker/.env
-    #     restart: "no"
-    #     ports:
-    #         - 8001:3001
+    worker-container:
+        build:
+            context: ./projects/worker
+            dockerfile: Dockerfile
+        depends_on:
+            - mysql-container
+            - redis-container
+        env_file:
+            - ./projects/worker/.env
+        restart: "no"
+        ports:
+            - 8001:3001
 
     mysql-container:                                                          # Setting up local testing environment with mysql
         image: mysql
