@@ -89,6 +89,8 @@ Features
 
 <br/>
 
+```
+
 - As a user, I must be able to register on the platform. For this, it will only be
 necessary to enter a username and password.
 - As a user, I must be able to log into the system using an email and a password.
@@ -109,3 +111,5 @@ Nice to have
 - As a user, when I see the list of pages, I should be able to see the ones that are
 currently being processed.
 Guidelines
+
+```
