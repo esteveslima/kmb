@@ -49,6 +49,20 @@ export class ScrapeService {
     return;
   }
 
+  async registerScrapeDataFailure(params: {
+    scrape: {
+      id: number;
+    };
+  }): Promise<void> {
+    const { scrape } = params;
+
+    await this.scrapeOperationsDAO.registerScrapeDataFailure({
+      scrape,
+    });
+
+    return;
+  }
+
   async getScrapeResult(params: {
     scrapeId: number;
     userId: number;

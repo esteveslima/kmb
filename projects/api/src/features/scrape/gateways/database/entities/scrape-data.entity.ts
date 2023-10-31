@@ -9,9 +9,9 @@ export class ScrapeDataDatabaseEntity {
   @ManyToOne((type) => ScrapeDatabaseEntity, (scrape) => scrape.id)
   scrape: number;
 
-  @Column()
+  @Column({ type: 'longtext' })
   link: string;
 
-  @Column()
+  @Column({ type: 'longtext' })
   linkName: string;
 }

@@ -67,4 +67,20 @@ export class ScrapeOperationsDAO {
 
     return;
   }
+
+  async registerScrapeDataFailure(params: {
+    scrape: {
+      id: number;
+    };
+  }): Promise<void> {
+    const { scrape } = params;
+
+    await this.entityManager.update(
+      ScrapeDatabaseEntity,
+      { id: scrape.id },
+      { status: 'failure' },
+    );
+
+    return;
+  }
 }

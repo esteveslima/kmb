@@ -32,6 +32,7 @@ export class ScrapeResultConsumer {
       await this.scrapeService.registerScrapeDataResult({ scrape, scrapeData });
       return { status: 'success' };
     } catch (exception) {
+      await this.scrapeService.registerScrapeDataFailure({ scrape });
       return { status: 'failure', message: exception.toString() };
     }
   }
