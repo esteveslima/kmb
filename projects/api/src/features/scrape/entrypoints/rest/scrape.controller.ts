@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   HttpCode,
+  HttpException,
   HttpStatus,
   InternalServerErrorException,
   Param,
@@ -12,6 +13,7 @@ import { ScrapeService } from '../../scrape.service';
 import { ScrapePageRequestDTO } from './dtos/request/scrape-page-request.dto';
 import { GetScrapeResultRequestDTO } from './dtos/request/get-scrape-result-request.dto';
 import { GetScrapeResultResponseDTO } from './dtos/response/get-scrape-result-response.dto';
+import { GetScrapeSummaryResponseDTO } from './dtos/response/get-scrape-summary-response.dto';
 
 @Controller('/scrape')
 export class ScrapeController {
@@ -26,46 +28,49 @@ export class ScrapeController {
 
       return await this.scrapeService.scrapePage({ page, userId: mockUser });
     } catch (exception) {
-      // if(exception instanceof ...){
-
-      // }
+      console.log(exception);
+      if (exception instanceof HttpException) {
+        throw exception;
+      }
       throw new InternalServerErrorException();
     }
   }
 
-  // @Get('/:id')
-  // async getScrapeResult(
-  //   @Param() params: GetScrapeResultRequestDTO,
-  // ): Promise<GetScrapeResultResponseDTO> {
-  //   try {
-  //     const { scrapeId } = params;
-  //     const mockUser = 1;
+  @Get('/:id')
+  async getScrapeResult(
+    @Param() params: GetScrapeResultRequestDTO,
+  ): Promise<GetScrapeResultResponseDTO> {
+    try {
+      const { id } = params;
+      const mockUser = 1;
 
-  //     return await this.scrapeService.getScrapeResult({
-  //       scrapeId,
-  //       userId: mockUser,
-  //     });
-  //   } catch (exception) {
-  //     // if(exception instanceof ...){
+      return await this.scrapeService.getScrapeResult({
+        scrapeId: id,
+        userId: mockUser,
+      });
+    } catch (exception) {
+      console.log(exception);
+      if (exception instanceof HttpException) {
+        throw exception;
+      }
+      throw new InternalServerErrorException();
+    }
+  }
 
-  //     // }
-  //     throw new InternalServerErrorException();
-  //   }
-  // }
+  @Get()
+  async getScrapeSummary(): Promise<GetScrapeSummaryResponseDTO> {
+    try {
+      const mockUser = 1;
 
-  // @Get()
-  // async getScrapeSummary(): Promise<void> {
-  //   try {
-  //     const mockUser = 1;
-
-  //     return await this.scrapeService.getScrapeSummary({
-  //       userId: mockUser,
-  //     });
-  //   } catch (exception) {
-  //     // if(exception instanceof ...){
-
-  //     // }
-  //     throw new InternalServerErrorException();
-  //   }
-  // }
+      return await this.scrapeService.getScrapeSummary({
+        userId: mockUser,
+      });
+    } catch (exception) {
+      console.log(exception);
+      if (exception instanceof HttpException) {
+        throw exception;
+      }
+      throw new InternalServerErrorException();
+    }
+  }
 }

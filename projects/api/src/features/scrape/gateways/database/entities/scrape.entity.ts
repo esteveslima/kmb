@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import { ScrapeDataDatabaseEntity } from './scrape-data.entity';
 
 @Entity('scrape')
 export class ScrapeDatabaseEntity {
@@ -25,4 +27,10 @@ export class ScrapeDatabaseEntity {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(
+    (type) => ScrapeDataDatabaseEntity,
+    (scrapeData) => scrapeData.scrape,
+  )
+  scrapeData?: ScrapeDataDatabaseEntity[];
 }

@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ScrapeProducer } from './gateways/queue/scrapes/scrape.producer';
 import { ScrapeQueriesDAO } from './gateways/database/scrape-queries.dao';
-import { ScrapeDataDatabaseEntity } from './gateways/database/entities/scrape-data.entity';
 import { GetScrapeResultResponseDTO } from './entrypoints/rest/dtos/response/get-scrape-result-response.dto';
 import { ScrapeOperationsDAO } from './gateways/database/scrape-operations.dao';
+import { GetScrapeSummaryResponseDTO } from './entrypoints/rest/dtos/response/get-scrape-summary-response.dto';
 
 @Injectable()
 export class ScrapeService {
@@ -66,7 +66,7 @@ export class ScrapeService {
   async getScrapeResult(params: {
     scrapeId: number;
     userId: number;
-  }): Promise<ScrapeDataDatabaseEntity> {
+  }): Promise<GetScrapeResultResponseDTO> {
     const { scrapeId, userId } = params;
 
     const result = await this.scrapeQueriesDAO.getScrapeResult({
@@ -74,20 +74,29 @@ export class ScrapeService {
       userId,
     });
 
-    return result;
+    return {
+      pageName: result.pageName,
+      scrapeData: result.scrapeData.map((data) => ({
+        link: data.link,
+        linkName: data.linkName,
+      })),
+    };
   }
 
   async getScrapeSummary(params: {
     userId: number;
-  }): Promise<GetScrapeResultResponseDTO> {
+  }): Promise<GetScrapeSummaryResponseDTO> {
     const { userId } = params;
 
     const result = await this.scrapeQueriesDAO.getScrapeSummary({
       userId,
     });
 
-    // TODO: fix return format
-
-    return;
+    return {
+      summary: result.map((data) => ({
+        pageName: data.pageName,
+        totalLinks: data.scrapeData.length,
+      })),
+    };
   }
 }

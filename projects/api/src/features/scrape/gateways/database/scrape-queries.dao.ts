@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { ScrapeDataDatabaseEntity } from './entities/scrape-data.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ScrapeDatabaseEntity } from './entities/scrape.entity';
 
 export type ScrapeSummary = ScrapeDataDatabaseEntity & { dataCount: number };
 
@@ -10,42 +11,48 @@ export class ScrapeQueriesDAO {
   constructor(
     @InjectRepository(ScrapeDataDatabaseEntity)
     private scrapeDataRepository: Repository<ScrapeDataDatabaseEntity>,
+
+    @InjectRepository(ScrapeDatabaseEntity)
+    private scrapeRepository: Repository<ScrapeDatabaseEntity>,
   ) {}
 
   async getScrapeResult(params: {
     scrapeId: number;
     userId: number;
-  }): Promise<ScrapeDataDatabaseEntity> {
+  }): Promise<ScrapeDatabaseEntity> {
     const { scrapeId, userId } = params;
 
-    const query = this.scrapeDataRepository.createQueryBuilder('scrape_data');
+    const query = this.scrapeRepository.createQueryBuilder('scrape');
 
-    query.innerJoinAndSelect('scrape_data.scrape', 'scrape');
-    query.andWhere('scrape_data.scrape = :scrapeId', { scrapeId });
+    query.innerJoinAndSelect('scrape.scrapeData', 'scrape_data');
+    query.andWhere('scrape.id = :scrapeId', { scrapeId });
 
-    query.innerJoinAndSelect('scrape.user', 'user');
-    query.andWhere('scrape.user = :userId', { userId });
+    // //TODO
+    // // query.innerJoinAndSelect('scrape.user', 'user');
+    // // query.andWhere('scrape.user = :userId', { userId });
 
-    const result = await query.getOneOrFail();
-
-    return result;
+    try {
+      const result = await query.getOneOrFail();
+      return result;
+    } catch (exception) {
+      console.log(exception);
+      throw new NotFoundException('Scrape not found for user'); // throwing http exception directly to save time
+    }
   }
 
-  async getScrapeSummary(params: { userId: number }): Promise<any> {
+  async getScrapeSummary(params: {
+    userId: number;
+  }): Promise<ScrapeDatabaseEntity[]> {
+    // Ideally it would be better to customize the query with GroupBy and Count to avoid fetching all the records and counting in code
+    // Unfortunatelly I couldn't find how to do it fast enough, so I'm sticking with this simple solution
     const { userId } = params;
 
-    const query = this.scrapeDataRepository.createQueryBuilder('scrape_data');
+    const query = this.scrapeRepository.createQueryBuilder('scrape');
 
-    query.select('scrape.*, COUNT(scrape.id) as dataCount');
-
-    query.innerJoinAndSelect('scrape_data.scrape', 'scrape');
-
-    query.innerJoinAndSelect('scrape.user', 'user');
+    query.innerJoinAndSelect('scrape.scrapeData', 'scrape_data');
     query.andWhere('scrape.user = :userId', { userId });
 
-    query.groupBy('scrape.id');
-
-    const result = await query.getRawMany();
+    const result = await query.getMany();
 
     return result;
   }
