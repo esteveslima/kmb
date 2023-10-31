@@ -2,7 +2,8 @@
 
 ## Candidate notes:
 
-- Many decisions were taken to simplify the project, as this is supposed to be a simple exercise
+- Many decisions were taken to simplify the project, as this is supposed to be a simple exercise and there's not much time for it
+- The simple Front-End part was not created because it's possible to test normally with the REST endpoints
 - Added below some improvements that would be required to be done in the case this was a real project
 
 ### Potential improvements:
