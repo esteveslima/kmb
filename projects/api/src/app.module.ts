@@ -81,8 +81,8 @@ import { JwtModule } from '@nestjs/jwt';
     UserService,
     UserQueriesDAO,
     UserOperationsDAO,
-    HashClient,
     TokenClient,
+    HashClient,
   ],
 })
 export class AppModule {}

@@ -95,6 +95,7 @@ export class ScrapeService {
 
     return {
       summary: result.map((data) => ({
+        id: data.id,
         pageName: data.pageName,
         status: data.status,
         totalLinks: data.scrapeData.length,
