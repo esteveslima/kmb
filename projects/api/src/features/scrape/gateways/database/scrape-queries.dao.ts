@@ -27,9 +27,7 @@ export class ScrapeQueriesDAO {
     query.innerJoinAndSelect('scrape.scrapeData', 'scrape_data');
     query.andWhere('scrape.id = :scrapeId', { scrapeId });
 
-    // //TODO
-    // // query.innerJoinAndSelect('scrape.user', 'user');
-    // // query.andWhere('scrape.user = :userId', { userId });
+    query.andWhere('scrape.user = :userId', { userId });
 
     try {
       const result = await query.getOneOrFail();

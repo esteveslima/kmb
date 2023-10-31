@@ -42,7 +42,7 @@ export class ScrapeController {
   ): Promise<GetScrapeResultResponseDTO> {
     try {
       const { id } = params;
-      const mockUser = 1;
+      const mockUser = 2;
 
       return await this.scrapeService.getScrapeResult({
         scrapeId: id,
@@ -60,7 +60,7 @@ export class ScrapeController {
   @Get()
   async getScrapeSummary(): Promise<GetScrapeSummaryResponseDTO> {
     try {
-      const mockUser = 1;
+      const mockUser = 2;
 
       return await this.scrapeService.getScrapeSummary({
         userId: mockUser,
