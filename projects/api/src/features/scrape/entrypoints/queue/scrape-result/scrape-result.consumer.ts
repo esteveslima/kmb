@@ -1,12 +1,16 @@
 import { Processor, Process } from '@nestjs/bull';
 import { Job } from 'bull';
 import { ScrapeService } from '../../../scrape.service';
-import { ScrapeDatabaseEntity } from '../../../gateways/database/entities/scrape.entity';
-import { ScrapeDataDatabaseEntity } from '../../../gateways/database/entities/scrape-data.entity';
 
 interface ScrapeDataJobPayload {
-  scrape: ScrapeDatabaseEntity;
-  scrapeData: ScrapeDataDatabaseEntity[];
+  scrape: {
+    id: number;
+    pageName: string;
+  };
+  scrapeData: {
+    linkName: string;
+    link: string;
+  }[];
 }
 
 interface ScrapeJobResult {
@@ -14,8 +18,8 @@ interface ScrapeJobResult {
   message?: string;
 }
 
-@Processor(process.env.QUEUE_NAME)
-export class ScrapeConsumer {
+@Processor(process.env.QUEUE_SCRAPE_RESULT_NAME)
+export class ScrapeResultConsumer {
   constructor(private scrapeService: ScrapeService) {}
 
   @Process()

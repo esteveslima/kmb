@@ -11,6 +11,7 @@ import { ScrapeQueriesDAO } from './features/scrape/gateways/database/scrape-que
 import { ScrapeController } from './features/scrape/entrypoints/rest/scrape.controller';
 import { ScrapeDataDatabaseEntity } from './features/scrape/gateways/database/entities/scrape-data.entity';
 import { ScrapeOperationsDAO } from './features/scrape/gateways/database/scrape-operations.dao';
+import { ScrapeResultConsumer } from './features/scrape/entrypoints/queue/scrape-result/scrape-result.consumer';
 
 @Module({
   imports: [
@@ -21,17 +22,24 @@ import { ScrapeOperationsDAO } from './features/scrape/gateways/database/scrape-
         db: +process.env.QUEUE_REDIS_DB,
       },
     }),
-    BullModule.registerQueue({
-      name: process.env.QUEUE_NAME,
-    }),
+    BullModule.registerQueue(
+      { name: process.env.QUEUE_SCRAPE_NAME },
+      { name: process.env.QUEUE_SCRAPE_RESULT_NAME },
+    ),
     BullBoardModule.forRoot({
       route: '/queues',
       adapter: ExpressAdapter,
     }),
-    BullBoardModule.forFeature({
-      name: process.env.QUEUE_NAME,
-      adapter: BullMQAdapter,
-    }),
+    BullBoardModule.forFeature(
+      {
+        name: process.env.QUEUE_SCRAPE_NAME,
+        adapter: BullMQAdapter,
+      },
+      {
+        name: process.env.QUEUE_SCRAPE_RESULT_NAME,
+        adapter: BullMQAdapter,
+      },
+    ),
 
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -50,6 +58,7 @@ import { ScrapeOperationsDAO } from './features/scrape/gateways/database/scrape-
   providers: [
     ScrapeService,
     ScrapeProducer,
+    ScrapeResultConsumer,
     ScrapeQueriesDAO,
     ScrapeOperationsDAO,
   ],

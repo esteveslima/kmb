@@ -3,7 +3,6 @@ import { ScrapeProducer } from './gateways/queue/scrapes/scrape.producer';
 import { ScrapeQueriesDAO } from './gateways/database/scrape-queries.dao';
 import { ScrapeDataDatabaseEntity } from './gateways/database/entities/scrape-data.entity';
 import { GetScrapeResultResponseDTO } from './entrypoints/rest/dtos/response/get-scrape-result-response.dto';
-import { ScrapeDatabaseEntity } from './gateways/database/entities/scrape.entity';
 import { ScrapeOperationsDAO } from './gateways/database/scrape-operations.dao';
 
 @Injectable()
@@ -17,8 +16,13 @@ export class ScrapeService {
   async scrapePage(params: { page: string; userId: number }): Promise<void> {
     const { page, userId } = params;
 
-    await this.scrapeProducer.produceScrapeJob({
+    const newScrapeRecord = await this.scrapeOperationsDAO.registerScrapeInit({
+      page,
       userId,
+    });
+
+    await this.scrapeProducer.produceScrapeJob({
+      scrapeId: newScrapeRecord.id,
       page,
     });
 
@@ -26,8 +30,14 @@ export class ScrapeService {
   }
 
   async registerScrapeDataResult(params: {
-    scrape: ScrapeDatabaseEntity;
-    scrapeData: ScrapeDataDatabaseEntity[];
+    scrape: {
+      id: number;
+      pageName: string;
+    };
+    scrapeData: {
+      linkName: string;
+      link: string;
+    }[];
   }): Promise<void> {
     const { scrape, scrapeData } = params;
 

@@ -7,7 +7,7 @@ export class ScrapeDataDatabaseEntity {
   id: number;
 
   @ManyToOne((type) => ScrapeDatabaseEntity, (scrape) => scrape.id)
-  scrape: ScrapeDatabaseEntity;
+  scrape: number;
 
   @Column()
   link: string;
