@@ -12,6 +12,14 @@ import { ScrapeController } from './features/scrape/entrypoints/rest/scrape.cont
 import { ScrapeDataDatabaseEntity } from './features/scrape/gateways/database/entities/scrape-data.entity';
 import { ScrapeOperationsDAO } from './features/scrape/gateways/database/scrape-operations.dao';
 import { ScrapeResultConsumer } from './features/scrape/entrypoints/queue/scrape-result/scrape-result.consumer';
+import { UserController } from './features/user/entrypoints/rest/user.controller';
+import { UserService } from './features/user/user.service';
+import { UserQueriesDAO } from './features/user/gateways/database/user-queries.dao';
+import { UserOperationsDAO } from './features/user/gateways/database/user-operations.dao';
+import { HashClient } from './features/user/gateways/client/hash/hash-client.service';
+import { TokenClient } from './features/user/gateways/client/token/token-client.service';
+import { UserDatabaseEntity } from './features/user/gateways/database/entities/user.entity';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -52,15 +60,29 @@ import { ScrapeResultConsumer } from './features/scrape/entrypoints/queue/scrape
       autoLoadEntities: true,
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([ScrapeDatabaseEntity, ScrapeDataDatabaseEntity]),
+    TypeOrmModule.forFeature([
+      ScrapeDatabaseEntity,
+      ScrapeDataDatabaseEntity,
+      UserDatabaseEntity,
+    ]),
+
+    JwtModule.register({
+      global: true,
+      secret: process.env.JWT_SECRET,
+    }),
   ],
-  controllers: [ScrapeController],
+  controllers: [ScrapeController, UserController],
   providers: [
     ScrapeService,
     ScrapeProducer,
     ScrapeResultConsumer,
     ScrapeQueriesDAO,
     ScrapeOperationsDAO,
+    UserService,
+    UserQueriesDAO,
+    UserOperationsDAO,
+    HashClient,
+    TokenClient,
   ],
 })
 export class AppModule {}

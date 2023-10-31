@@ -1,5 +1,6 @@
 class ScrapeSummaryData {
   pageName: string;
+  status: string;
   totalLinks: number;
 }
 

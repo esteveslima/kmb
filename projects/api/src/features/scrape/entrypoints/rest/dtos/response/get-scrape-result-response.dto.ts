@@ -5,5 +5,6 @@ class ScrapeData {
 
 export class GetScrapeResultResponseDTO {
   pageName: string;
+  status: string;
   scrapeData: ScrapeData[];
 }

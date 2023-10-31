@@ -76,6 +76,7 @@ export class ScrapeService {
 
     return {
       pageName: result.pageName,
+      status: result.status,
       scrapeData: result.scrapeData.map((data) => ({
         link: data.link,
         linkName: data.linkName,
@@ -95,6 +96,7 @@ export class ScrapeService {
     return {
       summary: result.map((data) => ({
         pageName: data.pageName,
+        status: data.status,
         totalLinks: data.scrapeData.length,
       })),
     };

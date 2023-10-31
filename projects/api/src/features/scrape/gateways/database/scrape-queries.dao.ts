@@ -9,9 +9,6 @@ export type ScrapeSummary = ScrapeDataDatabaseEntity & { dataCount: number };
 @Injectable()
 export class ScrapeQueriesDAO {
   constructor(
-    @InjectRepository(ScrapeDataDatabaseEntity)
-    private scrapeDataRepository: Repository<ScrapeDataDatabaseEntity>,
-
     @InjectRepository(ScrapeDatabaseEntity)
     private scrapeRepository: Repository<ScrapeDatabaseEntity>,
   ) {}
@@ -22,15 +19,11 @@ export class ScrapeQueriesDAO {
   }): Promise<ScrapeDatabaseEntity> {
     const { scrapeId, userId } = params;
 
-    const query = this.scrapeRepository.createQueryBuilder('scrape');
-
-    query.innerJoinAndSelect('scrape.scrapeData', 'scrape_data');
-    query.andWhere('scrape.id = :scrapeId', { scrapeId });
-
-    query.andWhere('scrape.user = :userId', { userId });
-
     try {
-      const result = await query.getOneOrFail();
+      const result = await this.scrapeRepository.findOneOrFail({
+        where: { id: scrapeId, user: userId },
+        relations: { scrapeData: true },
+      });
       return result;
     } catch (exception) {
       console.log(exception);
@@ -45,12 +38,17 @@ export class ScrapeQueriesDAO {
     // Unfortunatelly I couldn't find how to do it fast enough, so I'm sticking with this simple solution
     const { userId } = params;
 
-    const query = this.scrapeRepository.createQueryBuilder('scrape');
+    const result = await this.scrapeRepository.find({
+      where: { user: userId },
+      relations: { scrapeData: true },
+    });
 
-    query.innerJoinAndSelect('scrape.scrapeData', 'scrape_data');
-    query.andWhere('scrape.user = :userId', { userId });
+    // const query = this.scrapeRepository.createQueryBuilder('scrape');
 
-    const result = await query.getMany();
+    // query.innerJoinAndSelect('scrape.scrapeData', 'scrape_data');
+    // query.andWhere('scrape.user = :userId', { userId });
+
+    // const result = await query.getMany();
 
     return result;
   }
